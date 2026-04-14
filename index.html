@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethan Moyal — IT & Cybersecurity</title>
+<meta name="description" content="Ethan Moyal — Information Systems & Security graduate based in Montreal.">
+<meta property="og:title" content="Ethan Moyal">
+<meta property="og:description" content="Information Systems & Security graduate based in Montreal.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' font-family='serif'%3EE%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0d0e10;
+    --text: #e8e6e1;
+    --text-dim: #8a8680;
+    --text-dimmer: #55524e;
+    --accent: #d4a574;
+    --accent-glow: rgba(212, 165, 116, 0.15);
+    --border: rgba(232, 230, 225, 0.08);
+    --serif: 'Instrument Serif', serif;
+    --sans: 'Inter Tight', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.6;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    min-height: 100vh;
+    position: relative;
+    z-index: 2;
+  }
+
+  .lang-toggle {
+    position: fixed;
+    top: 28px;
+    right: 32px;
+    display: flex;
+    gap: 2px;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    z-index: 50;
+    background: rgba(13, 14, 16, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 4px;
+    animation: fadeUp 0.8s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .lang-toggle button {
+    background: none;
+    border: none;
+    color: var(--text-dimmer);
+    padding: 6px 12px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+    font-family: inherit;
+    font-size: inherit;
+    letter-spacing: inherit;
+  }
+
+  .lang-toggle button:hover { color: var(--text); }
+  .lang-toggle button.active {
+    color: var(--bg);
+    background: var(--accent);
+  }
+
+  aside {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: 100px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .intro h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.6rem, 5.2vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .intro .tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.35rem;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .intro .pitch {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    max-width: 380px;
+    animation: fadeUp 0.8s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .intro .pitch strong { color: var(--text); font-weight: 400; }
+
+  nav {
+    margin-top: 48px;
+    animation: fadeUp 0.8s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  nav ul { list-style: none; }
+
+  nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 0;
+    color: var(--text-dimmer);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  nav a::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.3s, background 0.3s;
+  }
+
+  nav a:hover, nav a.active { color: var(--text); }
+  nav a:hover::before, nav a.active::before {
+    width: 64px;
+    background: var(--accent);
+  }
+
+  .socials {
+    display: flex;
+    gap: 28px;
+    animation: fadeUp 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .socials a {
+    color: var(--text-dim);
+    transition: color 0.2s, transform 0.2s;
+    display: inline-flex;
+  }
+
+  .socials a:hover { color: var(--accent); transform: translateY(-2px); }
+  .socials svg { width: 34px; height: 34px; }
+
+  main { padding: 100px 0; }
+
+  section {
+    margin-bottom: 72px;
+    scroll-margin-top: 80px;
+  }
+
+  section:last-child { margin-bottom: 40px; }
+
+  .section-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    padding: 20px 0 16px;
+    z-index: 10;
+  }
+
+  .prose p { color: var(--text-dim); margin-bottom: 16px; }
+  .prose strong { color: var(--text); font-weight: 400; }
+
+  .prose a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--text-dimmer);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .prose a:hover { color: var(--accent); border-color: var(--accent); }
+
+  .card {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 24px;
+    padding: 20px;
+    margin: 0 -20px 12px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: background 0.3s, border-color 0.3s;
+  }
+
+  .card:hover {
+    background: rgba(232, 230, 225, 0.025);
+    border-color: var(--border);
+  }
+
+  .card:hover h3 { color: var(--accent); }
+  .card:hover .arrow { transform: translate(3px, -3px); color: var(--accent); }
+
+  .card .date {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--text-dimmer);
+    text-transform: uppercase;
+    padding-top: 4px;
+  }
+
+  .card h3 {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    font-weight: 400;
+    margin-bottom: 4px;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card .subtitle { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 12px; }
+  .card p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 14px; }
+
+  .arrow { display: inline-block; transition: transform 0.3s, color 0.3s; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: var(--accent-glow);
+    color: var(--accent);
+    letter-spacing: 0.03em;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+  }
+
+  .skill-group h4 {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  .skill-group ul { list-style: none; }
+
+  .skill-group li {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    padding: 4px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .skill-group li::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: var(--text-dimmer);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .cv-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    padding: 14px 20px;
+    border: 1px solid #3a3834 !important;
+    border-radius: 4px;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    margin-top: 8px;
+  }
+
+  .cv-link:hover {
+    color: var(--accent);
+    border: 1px solid var(--accent) !important;
+    background: var(--accent-glow);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ——— Responsive ——— */
+
+  /* Tablet landscape & small desktop */
+  @media (max-width: 1100px) {
+    .container {
+      gap: 60px;
+      padding: 0 28px;
+    }
+    aside { padding: 80px 0; }
+    main { padding: 80px 0; }
+  }
+
+  /* Tablet portrait & mobile — single column */
+  @media (max-width: 900px) {
+    .container {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 0 32px;
+    }
+    aside {
+      position: relative;
+      height: auto;
+      padding: 100px 0 24px;
+      max-width: 560px;
+    }
+    main {
+      padding: 0 0 60px;
+      max-width: 680px;
+    }
+    section { margin-bottom: 56px; }
+    .card {
+      grid-template-columns: 90px 1fr;
+      gap: 16px;
+      padding: 16px;
+      margin: 0 -16px 8px;
+    }
+    .card .date { padding-top: 0; font-size: 0.68rem; }
+    .lang-toggle { top: 16px; right: 16px; }
+  }
+
+  /* Phone */
+  @media (max-width: 600px) {
+    .container { padding: 0 20px; }
+    aside { padding: 80px 0 20px; }
+    .intro h1 { font-size: 3rem; }
+    .intro .tagline { font-size: 1.2rem; }
+    .intro .pitch { font-size: 0.92rem; }
+    nav { margin-top: 36px; }
+    section { margin-bottom: 48px; }
+    .section-label {
+      font-size: 0.68rem;
+      padding: 16px 0 12px;
+      margin-bottom: 20px;
+    }
+    .card {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+    .card .date {
+      font-size: 0.7rem;
+      padding-top: 0;
+    }
+    .card h3 { font-size: 1.2rem; }
+    .skills-grid { gap: 24px; }
+    .cv-link { font-size: 0.72rem; padding: 12px 16px; }
+  }
+
+  /* Very small phones */
+  @media (max-width: 380px) {
+    .container { padding: 0 16px; }
+    .intro h1 { font-size: 2.6rem; }
+    .lang-toggle { font-size: 0.68rem; padding: 3px; }
+    .lang-toggle button { padding: 5px 9px; }
+  }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+</style>
+</head>
+<body>
+
+<div class="lang-toggle" role="group" aria-label="Language">
+  <button data-lang="en" class="active" aria-label="English">EN</button>
+  <button data-lang="fr" aria-label="Français">FR</button>
+</div>
+
+<div class="container">
+
+  <aside>
+    <div>
+      <div class="intro">
+        <h1>Ethan Moyal</h1>
+        <p class="tagline" data-i18n="tagline"></p>
+        <p class="pitch" data-i18n="pitch"></p>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="#about" data-nav data-i18n="nav_about"></a></li>
+          <li><a href="#experience" data-nav data-i18n="nav_experience"></a></li>
+          <li><a href="#projects" data-nav data-i18n="nav_projects"></a></li>
+          <li><a href="#skills" data-nav data-i18n="nav_skills"></a></li>
+          <li><a href="#contact" data-nav data-i18n="nav_contact"></a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="socials">
+      <a href="https://github.com/ethanmoyal" aria-label="GitHub" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.32-1.28-1.67-1.28-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.47.11-3.06 0 0 .96-.31 3.15 1.18.92-.26 1.9-.39 2.88-.39s1.96.13 2.88.39c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.77.11 3.06.73.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.27 5.69.41.36.78 1.07.78 2.16v3.2c0 .31.21.68.8.56C20.21 21.38 23.5 17.08 23.5 12 23.5 5.73 18.27.5 12 .5z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/ethanmoyal/" aria-label="LinkedIn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.25 6.5 1.75 1.75 0 016.5 8.25zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+      </a>
+      <a id="social-email" href="#" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <main>
+
+    <section id="about" class="reveal">
+      <span class="section-label" data-i18n="label_about"></span>
+      <div class="prose">
+        <p data-i18n="about_p1"></p>
+        <p data-i18n="about_p2"></p>
+        <p data-i18n="about_p3"></p>
+        <p data-i18n="about_p4"></p>
+      </div>
+    </section>
+
+    <section id="experience" class="reveal">
+      <span class="section-label" data-i18n="label_experience"></span>
+
+      <div class="card">
+        <div class="date">2025 — 2026</div>
+        <div>
+          <h3 data-i18n="exp_chabad_title"></h3>
+          <div class="subtitle" data-i18n="exp_chabad_sub"></div>
+          <p data-i18n="exp_chabad_desc"></p>
+          <div class="tags">
+            <span class="tag">Volunteering</span>
+            <span class="tag">Logistics</span>
+            <span class="tag">Community</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="date">2024</div>
+        <div>
+          <h3 data-i18n="exp_2024_title"></h3>
+          <div class="subtitle" data-i18n="exp_2024_sub"></div>
+          <p data-i18n="exp_2024_desc"></p>
+          <div class="tags">
+            <span class="tag">IT Support</span>
+            <span class="tag">Access Mgmt</span>
+            <span class="tag">Data Organization</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="date">2022</div>
+        <div>
+          <h3 data-i18n="exp_2022_title"></h3>
+          <div class="subtitle" data-i18n="exp_2022_sub"></div>
+          <p data-i18n="exp_2022_desc"></p>
+          <div class="tags">
+            <span class="tag">Teamwork</span>
+            <span class="tag">Customer Service</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="reveal">
+      <span class="section-label" data-i18n="label_projects"></span>
+
+      <div class="card">
+        <div class="date" data-i18n="proj_auth_date"></div>
+        <div>
+          <h3 data-i18n="proj_auth_title"></h3>
+          <div class="subtitle" data-i18n="proj_auth_sub"></div>
+          <p data-i18n="proj_auth_desc"></p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Go</span>
+            <span class="tag">AppSec</span>
+            <span class="tag">Automation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="date" data-i18n="proj_infra_date"></div>
+        <div>
+          <h3 data-i18n="proj_infra_title"></h3>
+          <div class="subtitle" data-i18n="proj_infra_sub"></div>
+          <p data-i18n="proj_infra_desc"></p>
+          <div class="tags">
+            <span class="tag">Virtualization</span>
+            <span class="tag">Windows Server</span>
+            <span class="tag">Access Control</span>
+            <span class="tag">Web Server</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="reveal">
+      <span class="section-label" data-i18n="label_skills"></span>
+
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h4 data-i18n="skills_cyber"></h4>
+          <ul>
+            <li data-i18n="sk_cyber_1"></li>
+            <li data-i18n="sk_cyber_2"></li>
+            <li data-i18n="sk_cyber_3"></li>
+            <li data-i18n="sk_cyber_4"></li>
+            <li data-i18n="sk_cyber_5"></li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h4 data-i18n="skills_infra"></h4>
+          <ul>
+            <li data-i18n="sk_infra_1"></li>
+            <li data-i18n="sk_infra_2"></li>
+            <li data-i18n="sk_infra_3"></li>
+            <li data-i18n="sk_infra_4"></li>
+            <li data-i18n="sk_infra_5"></li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h4 data-i18n="skills_dev"></h4>
+          <ul>
+            <li data-i18n="sk_dev_1"></li>
+            <li data-i18n="sk_dev_2"></li>
+            <li data-i18n="sk_dev_3"></li>
+            <li data-i18n="sk_dev_4"></li>
+            <li data-i18n="sk_dev_5"></li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h4 data-i18n="skills_ai"></h4>
+          <ul>
+            <li data-i18n="sk_ai_1"></li>
+            <li data-i18n="sk_ai_2"></li>
+            <li data-i18n="sk_ai_3"></li>
+            <li data-i18n="sk_ai_4"></li>
+            <li data-i18n="sk_ai_5"></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="reveal">
+      <span class="section-label" data-i18n="label_contact"></span>
+      <div class="prose">
+        <p style="margin-top: 8px;">
+          <a id="contact-email" href="#"></a> &nbsp;·&nbsp; +1 438-459-4575
+        </p>
+        <a id="cv-download" href="./Ethan_Moyal_CV_EN.pdf" class="cv-link" download>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="cv_button"></span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<script>
+  // Build email client-side to avoid server-side obfuscation
+  (function() {
+    const u = 'ethan', d = 'memoyal.com';
+    const addr = u + '\u0040' + d;
+    const mail = 'mailto:' + addr;
+    const e1 = document.getElementById('social-email');
+    if (e1) e1.href = mail;
+    const e2 = document.getElementById('contact-email');
+    if (e2) { e2.href = mail; e2.textContent = addr; }
+  })();
+</script>
+<script>
+  const i18n = {
+    en: {
+      tagline: "Information Systems &amp; Security.",
+      pitch: "Graduate in <strong>Information Systems Management &amp; Security</strong> (HEC Montreal &amp; UdeM). I build, secure, and automate the infrastructure that keeps teams running.",
+      nav_about: "About",
+      nav_experience: "Experience",
+      nav_projects: "Projects",
+      nav_skills: "Skills",
+      nav_contact: "Contact",
+      label_about: "About",
+      label_experience: "Experience",
+      label_projects: "Projects",
+      label_skills: "Skills",
+      label_contact: "Contact",
+      about_p1: "Hi — I'm Ethan. I hold a <strong>Bachelor's degree in Information Systems Management &amp; Security</strong> from HEC Montreal and Université de Montréal (2025), with specializations in <strong>cybersecurity</strong>, business analysis, and digital information management.",
+      about_p2: "What I care about: the zone where infrastructure meets security — first-line support done right, system administration (Windows / Linux / macOS), automating the repetitive stuff, and putting access controls in place that actually hold up.",
+      about_p3: "I've also built strong, self-taught skills in <strong>working with AI and prompt engineering</strong> — I use LLMs daily as a force multiplier for research, code, and automation. I'm <strong>resourceful, I learn fast, and I ramp up quickly</strong> in new environments and tools.",
+      about_p4: "Based in <strong>Montreal</strong>, driver's license.",
+      exp_chabad_title: "Volunteer — Operations &amp; Logistics",
+      exp_chabad_sub: "Chabad of Université de Montréal · Non-profit",
+      exp_chabad_desc: "Ongoing volunteer work for the non-profit serving the Jewish student community at UdeM. Handled general logistics and back-of-house operations: event setup and teardown, inventory and supply management, kitchen support for community meals, room preparation, and hands-on help wherever needed to keep weekly programming running smoothly.",
+      exp_2024_title: "IT Support Assistant",
+      exp_2024_sub: "UPLIFT 4MEDIA · Montreal",
+      exp_2024_desc: "First-line support on internal IT tools. Organized and managed internal data, documents, and access. Contributed to the smooth operation of the team's digital systems and processes.",
+      exp_2022_title: "Crew Member — Mr. Puffs",
+      exp_2022_sub: "Montreal",
+      exp_2022_desc: "Customer service in a fast-paced environment, strict adherence to operational procedures, teamwork under pressure.",
+      proj_auth_date: "Personal",
+      proj_auth_title: "Authentication module &amp; bot",
+      proj_auth_sub: "Application security · Automation",
+      proj_auth_desc: "Designed a full auth module — session management, client-side validation, secure storage, expiration and error handling. Built a bot with file uploads, parsing/validation, and task execution. End-to-end workflows: artifact generation, automated delivery, multi-environment deployment.",
+      proj_infra_date: "Academic",
+      proj_infra_title: "Infrastructure &amp; systems administration",
+      proj_infra_sub: "Academic project · HEC / UdeM",
+      proj_infra_desc: "Deployed a remote lab environment through virtualization, set up a file/intranet server with roles, groups, and access rights. Installed and configured a web server and CMS.",
+      skills_cyber: "Cybersecurity &amp; GRC",
+      sk_cyber_1: "Cyber risk analysis",
+      sk_cyber_2: "Governance &amp; compliance",
+      sk_cyber_3: "Access control (RBAC)",
+      sk_cyber_4: "Backups &amp; encryption",
+      sk_cyber_5: "Disaster recovery planning",
+      skills_infra: "Infrastructure",
+      sk_infra_1: "Virtualization",
+      sk_infra_2: "Windows / Linux / macOS admin",
+      sk_infra_3: "End-user support",
+      sk_infra_4: "RMM tools",
+      sk_infra_5: "Web / intranet servers",
+      skills_dev: "Dev &amp; Automation",
+      sk_dev_1: "Python · Go · Objective-C",
+      sk_dev_2: "Git &amp; GitHub",
+      sk_dev_3: "Bots &amp; scripts",
+      sk_dev_4: "Auth modules",
+      sk_dev_5: "CI / multi-env deploy",
+      skills_ai: "AI &amp; Prompt Engineering",
+      sk_ai_1: "Advanced LLM workflows",
+      sk_ai_2: "Prompt engineering (self-taught)",
+      sk_ai_3: "AI-assisted development",
+      sk_ai_4: "Research &amp; automation with AI",
+      sk_ai_5: "Fast learner, highly adaptable",
+      cv_button: "Download CV"
+    },
+    fr: {
+      tagline: "Systèmes d'information &amp; sécurité.",
+      pitch: "Diplômé en <strong>gestion et sécurité des systèmes d'information</strong> (HEC Montréal &amp; UdeM). Je construis, sécurise et automatise l'infrastructure qui fait tourner les équipes.",
+      nav_about: "À propos",
+      nav_experience: "Expérience",
+      nav_projects: "Projets",
+      nav_skills: "Compétences",
+      nav_contact: "Contact",
+      label_about: "À propos",
+      label_experience: "Expérience",
+      label_projects: "Projets",
+      label_skills: "Compétences",
+      label_contact: "Contact",
+      about_p1: "Salut — je m'appelle Ethan. Je suis titulaire d'un <strong>baccalauréat en gestion et sécurité des systèmes d'information</strong> de HEC Montréal et de l'Université de Montréal (2025), avec des spécialisations en <strong>cybersécurité</strong>, analyse d'affaires et gestion de l'information numérique.",
+      about_p2: "Ce qui m'intéresse : la zone où l'infrastructure rencontre la sécurité — le support de premier niveau bien fait, l'administration système (Windows / Linux / macOS), l'automatisation des tâches répétitives, et la mise en place de contrôles d'accès qui tiennent la route.",
+      about_p3: "J'ai aussi développé, en autodidacte, de solides compétences pour <strong>travailler avec l'IA et le prompt engineering</strong> — j'utilise les LLM au quotidien comme multiplicateur de force pour la recherche, le code et l'automatisation. Je suis <strong>débrouillard, j'apprends vite et je monte en puissance rapidement</strong> dans de nouveaux environnements.",
+      about_p4: "Basé à <strong>Montréal</strong>, permis de conduire.",
+      exp_chabad_title: "Bénévole — Intendance &amp; logistique",
+      exp_chabad_sub: "Chabad de l'Université de Montréal · Organisme à but non lucratif",
+      exp_chabad_desc: "Bénévolat continu pour l'organisme à but non lucratif au service de la communauté étudiante juive de l'UdeM. Prise en charge de l'intendance et de la logistique : préparation et rangement des événements, gestion des stocks et approvisionnements, soutien en cuisine pour les repas communautaires, mise en place des salles, et coup de main sur le terrain pour assurer le bon déroulement de la programmation hebdomadaire.",
+      exp_2024_title: "Assistant Support IT",
+      exp_2024_sub: "UPLIFT 4MEDIA · Montréal",
+      exp_2024_desc: "Support de premier niveau sur les outils IT internes. Organisation et gestion des données, documents et accès internes. Contribution au bon fonctionnement des systèmes et processus numériques de l'équipe.",
+      exp_2022_title: "Équipier — Mr. Puffs",
+      exp_2022_sub: "Montréal",
+      exp_2022_desc: "Service client en environnement rapide, respect strict des procédures opérationnelles, travail d'équipe sous pression.",
+      proj_auth_date: "Perso",
+      proj_auth_title: "Module d'authentification &amp; bot",
+      proj_auth_sub: "Sécurité applicative · Automatisation",
+      proj_auth_desc: "Conception d'un module d'auth complet — gestion de session, validation côté client, stockage sécurisé, expiration et gestion d'erreurs. Bot avec upload de fichiers, parsing/validation et exécution de tâches. Workflows end-to-end : génération d'artefacts, livraison automatisée, déploiement multi-environnements.",
+      proj_infra_date: "Acad.",
+      proj_infra_title: "Infrastructure &amp; administration système",
+      proj_infra_sub: "Projet académique · HEC / UdeM",
+      proj_infra_desc: "Déploiement d'un environnement de lab distant via virtualisation, mise en place d'un serveur de fichiers / intranet avec rôles, groupes et droits d'accès. Installation et configuration d'un serveur web et d'un CMS.",
+      skills_cyber: "Cybersécurité &amp; GRC",
+      sk_cyber_1: "Analyse de risques cyber",
+      sk_cyber_2: "Gouvernance &amp; conformité",
+      sk_cyber_3: "Contrôle d'accès (RBAC)",
+      sk_cyber_4: "Sauvegardes &amp; chiffrement",
+      sk_cyber_5: "Plan de reprise d'activité",
+      skills_infra: "Infrastructure",
+      sk_infra_1: "Virtualisation",
+      sk_infra_2: "Admin Windows / Linux / macOS",
+      sk_infra_3: "Support utilisateur",
+      sk_infra_4: "Outils RMM",
+      sk_infra_5: "Serveurs web / intranet",
+      skills_dev: "Dev &amp; Automatisation",
+      sk_dev_1: "Python · Go · Objective-C",
+      sk_dev_2: "Git &amp; GitHub",
+      sk_dev_3: "Bots &amp; scripts",
+      sk_dev_4: "Modules d'auth",
+      sk_dev_5: "CI / déploiement multi-env",
+      skills_ai: "IA &amp; Prompt Engineering",
+      sk_ai_1: "Workflows LLM avancés",
+      sk_ai_2: "Prompt engineering (autodidacte)",
+      sk_ai_3: "Développement assisté par IA",
+      sk_ai_4: "Recherche &amp; automatisation avec IA",
+      sk_ai_5: "Apprentissage rapide, très adaptable",
+      cv_button: "Télécharger le CV"
+    }
+  };
+
+  function setLanguage(lang) {
+    const dict = i18n[lang];
+    if (!dict) return;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll('.lang-toggle button').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    // Swap CV download link based on language
+    const cv = document.getElementById('cv-download');
+    if (cv) cv.href = lang === 'fr' ? './Ethan_Moyal_CV_FR.pdf' : './Ethan_Moyal_CV_EN.pdf';
+  }
+
+  const browserLang = (navigator.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en';
+  setLanguage(browserLang);
+
+  document.querySelectorAll('.lang-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a[data-nav]');
+  const navIo = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => navIo.observe(s));
+</script>
+
+</body>
+</html>
