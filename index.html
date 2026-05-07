@@ -659,7 +659,7 @@
         <p style="margin-top: 8px;">
           <a id="contact-email" href="#"></a> &nbsp;·&nbsp; +1 438-459-4575
         </p>
-        <a id="cv-download" href="./Ethan_Moyal_CV_EN.pdf" class="cv-link" download>
+        <a id="cv-download" href="#" class="cv-link">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span data-i18n="cv_button"></span>
         </a>
@@ -745,7 +745,8 @@
       sk_ai_3: "AI-assisted development",
       sk_ai_4: "Research &amp; automation with AI",
       sk_ai_5: "Fast learner, highly adaptable",
-      cv_button: "Download CV"
+      cv_button: "Download CV",
+      cv_updating: "CV is being updated — check back soon"
     },
     fr: {
       tagline: "Technicien Support IT @ JC Logic.",
@@ -808,7 +809,8 @@
       sk_ai_3: "Développement assisté par IA",
       sk_ai_4: "Recherche &amp; automatisation avec IA",
       sk_ai_5: "Apprentissage rapide, très adaptable",
-      cv_button: "Télécharger le CV"
+      cv_button: "Télécharger le CV",
+      cv_updating: "CV en cours de mise à jour — disponible bientôt"
     }
   };
 
@@ -823,9 +825,26 @@
     document.querySelectorAll('.lang-toggle button').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
-    // Swap CV download link based on language
-    const cv = document.getElementById('cv-download');
-    if (cv) cv.href = lang === 'fr' ? './Ethan_Moyal_CV_FR.pdf' : './Ethan_Moyal_CV_EN.pdf';
+  }
+
+  const cvBtn = document.getElementById('cv-download');
+  if (cvBtn) {
+    const cvLabel = cvBtn.querySelector('span');
+    cvBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (cvBtn.dataset.busy === '1') return;
+      cvBtn.dataset.busy = '1';
+      const originalKey = cvLabel.getAttribute('data-i18n');
+      const lang = document.documentElement.lang === 'fr' ? 'fr' : 'en';
+      cvLabel.setAttribute('data-i18n', 'cv_updating');
+      cvLabel.innerHTML = i18n[lang].cv_updating;
+      setTimeout(() => {
+        const curLang = document.documentElement.lang === 'fr' ? 'fr' : 'en';
+        cvLabel.setAttribute('data-i18n', originalKey);
+        cvLabel.innerHTML = i18n[curLang][originalKey];
+        cvBtn.dataset.busy = '0';
+      }, 3000);
+    });
   }
 
   const browserLang = (navigator.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en';
